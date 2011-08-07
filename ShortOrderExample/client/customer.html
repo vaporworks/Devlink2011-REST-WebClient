@@ -3,8 +3,21 @@
 <html>
 <head>
     <title>Customer Order Form</title>
+    <script type="text/javascript" src="js-lib/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="js-lib/jquery.tmpl.js"></script>
+    <script type="text/javascript" src="js-lib/knockout-latest.js"></script>
+    <script type="text/javascript" src="js-lib/amplify.core.js"></script>
+    <script type="text/javascript" src="js-lib/amplify.request.js"></script>
+    <script type="text/javascript" src="js-lib/amplify.store.js"></script>
+    <script type="text/javascript" src="js-lib/koExternalTemplateEngine.debug.js"></script>
+    <script type="text/javascript" src="js-lib/knockout.namespaces-latest.debug.js"></script>
+    <script type="text/javascript" src="js-lib/postal.js"></script>
+    <script type="text/javascript" src="js-app/request.js"></script>
+    <script type="text/javascript" src="js-app/main.js"></script>
 </head>
 <body>
-
+    <div>
+        <div data-bind="template: { name: 'menu' }"></div>
+    </div>
 </body>
 </html>
