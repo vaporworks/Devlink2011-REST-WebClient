@@ -13,18 +13,24 @@
     <script type="text/javascript" src="js-lib/amplify.store.js"></script>
     <script type="text/javascript" src="js-lib/koExternalTemplateEngine.debug.js"></script>
     <script type="text/javascript" src="js-lib/knockout.namespaces-latest.debug.js"></script>
+    <script type="text/javascript" src="js-lib/uuid.js"></script>
     <script type="text/javascript" src="js-lib/postal.js"></script>
-    <script type="text/javascript" src="js-app/request.js"></script>
+    <script type="text/javascript" src="js-app/request.local.js"></script>
     <script type="text/javascript" src="js-app/main.js"></script>
+    <script type="text/javascript" src="js-app/store.js"></script>
+    <script type="text/javascript" src="js-app/diagnostics.js"></script>
 </head>
 <body>
     <div class="top-info-bar"></div>
     <div class="all-wrapper">
-        <div class="menu-wrapper">
+        <div class="menu-wrapper" data-bind-menu="visible: isVisible">
             <div class="menu-container" data-bind-menu="template: { name: 'menu' }"></div>
         </div>
-        <div class="main-wrapper">
+        <div class="main-wrapper" data-bind-order="visible: isVisible">
             <div class="main-container" data-bind-order="template: { name: 'order' }"></div>
+        </div>
+        <div class="history-wrapper" data-bind-history="visible: isVisible">
+            <div class="history-container" data-bind-history="template: { name: 'history' }"></div>
         </div>
     </div>
 </body>

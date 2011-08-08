@@ -1,30 +1,9 @@
-// Postal.js
+// Postal.js alpha
 // Author: Jim Cowart
 // License: Dual licensed MIT (http://www.opensource.org/licenses/mit-license) & GPL (http://www.opensource.org/licenses/gpl-license)
-// Version 0.0.1
+// Version 0.0.0.0.0.0.0.1 :-)
 
 (function(global, undefined) {
-    /*if(!Object.prototype.forEach) {
-        Object.prototype.forEach = function (callback) {
-            var self = this;
-            for(var x in self) {
-                if(self.hasOwnProperty(x)) {
-                    callback(self[x]);
-                }
-            }
-        };
-    };
-
-    if(!Object.prototype.forEachKeyValue) {
-        Object.prototype.forEachKeyValue = function (callback) {
-            var self = this;
-            for(var x in self) {
-                if(self.hasOwnProperty(x)) {
-                    callback(x, self[x]);
-                }
-            }
-        };
-    };*/
 
     var _forEachKeyValue = function(object, callback) {
         for(var x in object) {
@@ -67,6 +46,8 @@
                 return this[topic + '_' + comparison];
             }.bind(this);
 
+        this.wireTaps = [];
+
         this.subscribe = function(topic, callback) {
             var topicList = topic.split(/\s/), // we allow multiple topics to be subscribed in one call.
                 subIdx = 0,
@@ -94,6 +75,11 @@
         };
 
         this.publish = function(topic, data) {
+            this.wireTaps.forEach(function(tap) {
+                if(typeof tap === 'function') {
+                    tap(topic, data);
+                }
+            });
             _forEachKeyValue(subscriptions, function(subNm, subs) {
                 if(isTopicMatch(topic, subNm)) {
                     subs.forEach(function(callback) {

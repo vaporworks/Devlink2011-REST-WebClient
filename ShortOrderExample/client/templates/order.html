@@ -1,14 +1,6 @@
 <div class="order-container">
     <div class="order-row">
         <div class="order-label">
-            <span>Order #:</span>
-        </div>
-        <div class="order-value">
-            <span data-bind-order="text: orderNumber"></span>
-        </div>
-    </div>
-    <div class="order-row">
-        <div class="order-label">
             <span>Name:</span>
         </div>
         <div class="order-value">
@@ -29,7 +21,7 @@
         </div>
         <div class="order-value">
             {{if items().length === 0}}
-            <div>Nothing ordered yet...</div>
+            <div class="passive-info-msg">Please select menu items...</div>
             {{else}}
                 {{each(i, item) items}}
                     <div class="ordered-item" data-bind-order="click: remove">
@@ -41,4 +33,8 @@
             {{/if}}
         </div>
     </div>
+</div>
+<div class="order-controls">
+    <input type="button" value="Clear Order" class="order-reset-action" data-bind-order="click: clear">
+    <input type="button" value="Place Order" class="order-place-action" data-bind-order="click: place, enable: enableSubmit">
 </div>
