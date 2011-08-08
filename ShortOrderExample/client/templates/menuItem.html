@@ -1,9 +1,17 @@
-<li>
-    <div>
-        <div>
-            <!--img data-bind="attr: {src : imageUrl }"-->
-            <div data-bind="text: description"></div>
-            <div data-bind="text: pricePerUnit"></div>
+<div class="menu-item">
+    <div class="menu-item-pic">
+        <img class="thumbnail-image" data-bind-menu="attr: { src: imageUrl }">
+    </div>
+    <div class="menu-content">
+        <div class="menu-row">
+            <div data-bind-menu="text: description"></div>
+        </div>
+        <div class="menu-row">
+            <div>
+                Price:&nbsp;$
+                <span data-bind-menu="text: pricePerUnit"></span>
+                <input type="button" value="+" class="menu-action-add" data-bind-menu="click: addMenuItem ">
+            </div>
         </div>
     </div>
-</li>
+</div>

@@ -1,0 +1,44 @@
+<div class="order-container">
+    <div class="order-row">
+        <div class="order-label">
+            <span>Order #:</span>
+        </div>
+        <div class="order-value">
+            <span data-bind-order="text: orderNumber"></span>
+        </div>
+    </div>
+    <div class="order-row">
+        <div class="order-label">
+            <span>Name:</span>
+        </div>
+        <div class="order-value">
+            <input type="text" data-bind-order="value: name">
+        </div>
+    </div>
+    <div class="order-row">
+        <div class="order-label">
+            <span>Cost:</span>
+        </div>
+        <div class="order-value">
+            <span data-bind-order="text: cost"></span>
+        </div>
+    </div>
+    <div class="order-row">
+        <div class="order-label">
+            <span>Items:</span>
+        </div>
+        <div class="order-value">
+            {{if items().length === 0}}
+            <div>Nothing ordered yet...</div>
+            {{else}}
+                {{each(i, item) items}}
+                    <div class="ordered-item" data-bind-order="click: remove">
+                        <input type="button" value="X" class="menu-action-add" data-bind-order="click: remove">
+                        <img class="thumbnail-image-nofloat" src="${imageUrl}" />
+                        <span class="${qtyClass}">&nbsp;x${ dispQty }</span>
+                    </div>
+                {{/each}}
+            {{/if}}
+        </div>
+    </div>
+</div>

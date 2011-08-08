@@ -1,0 +1,154 @@
+body {
+    font-family: Tahoma, Verdana, Arial, Helvetica;
+    font-size: 9pt;
+    background-color: #191970;
+}
+
+.menu-wrapper {
+    background-color: silver;
+    width: 200px;
+    padding-top:5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+    border-radius: 5px;
+    margin-top:50px;
+    float: left;
+    min-height: 292px;
+}
+
+.menu-container {
+    margin: 5px 5 5 5;
+    background-color: white;
+    border:  1pt solid #696969;
+}
+
+.menu-item-container {
+    list-style-type: none;
+    left:0px;
+    padding-bottom: 10px;
+    margin-left: 10px;
+}
+
+.menu-item {
+    padding-top: 10px;
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-bottom: 10px;
+    font-size: 15px;
+    zoom: 1;
+}
+
+.menu-item-pic {
+    
+}
+
+.menu-content {
+    padding-left: 55px;
+    padding-top:10px;
+}
+
+.menu-row {
+    display: block;
+    line-height: 15px;
+}
+
+.thumbnail-image {
+    float: left;
+    height: 48px;
+    overflow: hidden;
+    width: 48px;
+    border-radius: 10px;
+}
+
+.thumbnail-image-nofloat {
+    height: 48px;
+    overflow: hidden;
+    width: 48px;
+    border-radius: 10px;
+}
+
+.menu-action-add {
+    font-weight: bold;
+}
+
+.top-info-bar {
+    padding-left: 10px;
+    background-color: silver;
+    border-bottom:  1pt solid #696969;
+    border-top:  1pt solid #696969;
+    height: 40px;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
+
+.main-wrapper {
+    float: left;
+    margin-top:50px;
+    margin-left:20px;
+    background-color: silver;
+    min-width: 350px;
+    padding-top:5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+    border-radius: 5px;
+    float: left;
+}
+
+.main-container {
+    margin: 5px 5 5 5;
+    background-color: white;
+    border:  1pt solid #696969;
+}
+
+.order-container {
+    font-size: 12pt;
+    line-height: 15pt;
+    min-height: 270px;
+    padding-top: 10px;
+    width: 425px;
+}
+
+.order-row {
+    margin-bottom: 10px;
+}
+
+.order-label {
+    float:left;
+    margin-left: 10px;
+}
+
+.order-value {
+    padding-left: 65px;
+}
+
+.lightQty {
+    font-size: 32pt;
+    color: #dcdcdc;
+}
+
+.dimQty {
+    font-size: 32pt;
+    color: silver;
+}
+
+.darkQty {
+    font-size: 32pt;
+    color: #696969;
+}
+
+.darkestQty {
+    font-size: 32pt;
+    color: black;
+}
+
+.ordered-item {
+    display: inline-table;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+

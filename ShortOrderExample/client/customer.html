@@ -3,9 +3,11 @@
 <html>
 <head>
     <title>Customer Order Form</title>
+    <link rel="stylesheet" href="css/customer.css" type="text/css">
     <script type="text/javascript" src="js-lib/jquery-1.6.2.min.js"></script>
     <script type="text/javascript" src="js-lib/jquery.tmpl.js"></script>
-    <script type="text/javascript" src="js-lib/knockout-latest.js"></script>
+    <script type="text/javascript" src="js-lib/knockout-latest.debug.js"></script>
+    <script type="text/javascript" src="js-lib/knockout.mapping-latest.debug.js"></script>
     <script type="text/javascript" src="js-lib/amplify.core.js"></script>
     <script type="text/javascript" src="js-lib/amplify.request.js"></script>
     <script type="text/javascript" src="js-lib/amplify.store.js"></script>
@@ -16,8 +18,14 @@
     <script type="text/javascript" src="js-app/main.js"></script>
 </head>
 <body>
-    <div>
-        <div data-bind="template: { name: 'menu' }"></div>
+    <div class="top-info-bar"></div>
+    <div class="all-wrapper">
+        <div class="menu-wrapper">
+            <div class="menu-container" data-bind-menu="template: { name: 'menu' }"></div>
+        </div>
+        <div class="main-wrapper">
+            <div class="main-container" data-bind-order="template: { name: 'order' }"></div>
+        </div>
     </div>
 </body>
 </html>
