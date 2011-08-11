@@ -1,9 +1,3 @@
-body {
-    font-family: Tahoma, Verdana, Arial, Helvetica;
-    font-size: 9pt;
-    background-color: #191970;
-}
-
 .menu-wrapper {
     background-color: silver;
     width: 200px;
@@ -61,27 +55,8 @@ body {
     border-radius: 10px;
 }
 
-.thumbnail-image-nofloat {
-    height: 48px;
-    overflow: hidden;
-    width: 48px;
-    border-radius: 10px;
-}
-
 .menu-action-add {
     font-weight: bold;
-}
-
-.top-info-bar {
-    padding-left: 10px;
-    background-color: silver;
-    border-bottom:  1pt solid #696969;
-    border-top:  1pt solid #696969;
-    height: 20px;
-    width: 100%;
-    position: fixed;
-    top: 0px;
-    left: 0px;
 }
 
 .main-wrapper {
@@ -166,13 +141,6 @@ body {
     height: 25px;
 }
 
-.passive-info-msg {
-    color: silver;
-    font-style: italic;
-    font-size: 8pt;
-    margin-left: 5px;
-}
-
 .history-wrapper {
     float: left;
     margin-top:50px;
@@ -196,47 +164,4 @@ body {
     height: 99%;
     overflow-x: visible;
     overflow-y: auto;
-}
-
-.history-table {
-    width: 100%;
-    margin-top: 10px;
-    margin-right: 10px;
-    margin-left: 5px;
-    margin-bottom: 10px;
-}
-
-.history-table td {
-    padding-left: 5px;
-}
-
-.history-table th {
-    border-bottom: 1pt solid silver;
-}
-
-.section-header {
-    font-size: 11pt;
-    font-weight: bold;
-    color: #191970;
-}
-
-.centered-header {
-    text-align: center;
-    width: 100%;
-}
-
-.centered-value {
-    text-align: center;
-}
-
-.right-aligned-value {
-    text-align: right;
-}
-
-.history-row {
-    border-bottom: 1pt solid silver;
-}
-
-.history-row-alt {
-    background-color: #dcdcdc;
 }

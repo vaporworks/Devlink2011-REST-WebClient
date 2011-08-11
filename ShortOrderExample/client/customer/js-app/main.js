@@ -142,7 +142,6 @@ postal.subscribe("order.enqueue", function(order) {
 postal.subscribe("ko.init", function() {
     ko.applyBindings(orderViewModel, 'order');
     ko.applyBindings(orderHistoryViewModel, 'history');
-    //ko.applyBindings(infoViewModel, 'info');
 });
 
 postal.subscribe("storage.enqueuedOrders", function(enqueuedOrders) {

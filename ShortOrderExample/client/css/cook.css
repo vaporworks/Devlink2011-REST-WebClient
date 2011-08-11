@@ -1,0 +1,54 @@
+.orders-wrapper {
+    background-color: silver;
+    min-width: 600px;
+    padding-top:5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+    border-radius: 5px;
+    margin-top:30px;
+    float: left;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.orders-container {
+    background-color: white;
+    border: 1pt solid #696969;
+    padding-top: 5px;
+    padding-right: 15px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+
+.ordered-item {
+    display: inline;
+}
+
+.completed-wrapper {
+    
+}
+
+.completed-container {
+
+}
+
+.lightQty {
+    font-size: 12pt;
+    color: #dcdcdc;
+}
+
+.dimQty {
+    font-size: 12pt;
+    color: silver;
+}
+
+.darkQty {
+    font-size: 12pt;
+    color: #696969;
+}
+
+.darkestQty {
+    font-size: 12pt;
+    color: black;
+}

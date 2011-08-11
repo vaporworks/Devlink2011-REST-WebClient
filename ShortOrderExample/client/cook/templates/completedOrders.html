@@ -1,0 +1,45 @@
+<div class="section-header centered-header">Completed Orders</div>
+{{if completedOrders().length === 0}}
+<div class="passive-info-msg centered-header">Nothing to see here...</div>
+{{else}}
+<table class="history-table" cellspacing="0">
+    <tr>
+        <th>Name</th>
+        <th>Items</th>
+        <th class="right-aligned-value">Cost</th>
+        <th class="centered-value">Ordered Time</th>
+        <th class="centered-value">Completed Time</th>
+    </tr>
+{{each(i,item) completedOrders}}
+    <tr>
+    {{if i % 2 !== 0}}
+        <td class="history-row history-row-alt">${name}</td>
+        <td class="history-row history-row-alt">
+            {{each(x,line) items}}
+                <div class="ordered-item">
+                    <img class="tiny-thumbnail-image thumbnail-image-nofloat" src="${imageUrl}" />
+                    <span class="${qtyClass}">&nbsp;x${ dispQty }</span>
+                </div>
+            {{/each}}
+        </td>
+        <td class="history-row history-row-alt right-aligned-value">${dispCost}</td>
+        <td class="history-row history-row-alt centered-value">${dispTimeStamp}</td>
+        <td class="history-row history-row-alt centered-value">${dispCompleted}</td>
+    {{else}}
+        <td class="history-row">${name}</td>
+        <td class="history-row">
+            {{each(x,line) items}}
+                <div class="ordered-item">
+                    <img class="tiny-thumbnail-image thumbnail-image-nofloat" src="${imageUrl}" />
+                    <span class="${qtyClass}">&nbsp;x${ dispQty }</span>
+                </div>
+            {{/each}}
+        </td>
+        <td class="history-row right-aligned-value">${dispCost}</td>
+        <td class="history-row centered-value">${dispTimeStamp}</td>
+        <td class="history-row centered-value">${dispCompleted}</td>
+    {{/if}}
+    </tr>
+{{/each}}
+</table>
+{{/if}}

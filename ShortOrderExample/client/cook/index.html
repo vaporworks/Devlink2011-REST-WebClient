@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Cook's Order Viewer</title>
+    <link rel="stylesheet" href="../css/common.css" type="text/css">
+    <link rel="stylesheet" href="../css/cook.css" type="text/css">
+    <script type="text/javascript" src="../js-lib/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="../js-lib/jquery.tmpl.js"></script>
+    <script type="text/javascript" src="../js-lib/knockout-latest.debug.js"></script>
+    <script type="text/javascript" src="../js-lib/knockout.mapping-latest.debug.js"></script>
+    <script type="text/javascript" src="../js-lib/amplify.core.js"></script>
+    <script type="text/javascript" src="../js-lib/amplify.request.js"></script>
+    <script type="text/javascript" src="../js-lib/amplify.store.js"></script>
+    <script type="text/javascript" src="../js-lib/koExternalTemplateEngine.debug.js"></script>
+    <script type="text/javascript" src="../js-lib/knockout.namespaces-latest.debug.js"></script>
+    <script type="text/javascript" src="../js-lib/uuid.js"></script>
+    <script type="text/javascript" src="../js-lib/postal.js"></script>
+    <script type="text/javascript" src="./js-app/main.js"></script>
+    <script type="text/javascript" src="./js-app/request.local.js"></script>
+    <script type="text/javascript" src="../js-lib/diagnostics.js"></script>
+</head>
+<body>
+    <div class="top-info-bar top-info-bar-nav">
+        <a href="#" data-bind-nav="text: inProgressLabel, click: toggleInProgress"></a> | <a href="#" data-bind-nav="text: completedLabel, click: toggleCompleted"></a>
+    </div>
+    <div class="all-wrapper">
+        <div class="orders-wrapper" data-bind-order="visible: inProgressVisible">
+            <div class="orders-container" data-bind-order="template: { name: 'orders' }"></div>
+        </div>
+        <div class="orders-wrapper" data-bind-order="visible: completedVisible">
+            <div class="orders-container" data-bind-order="template: { name: 'completedOrders' }"></div>
+        </div>
+    </div>
+</body>
+</html>
