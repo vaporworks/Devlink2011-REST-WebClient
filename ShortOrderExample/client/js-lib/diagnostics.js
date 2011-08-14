@@ -1,4 +1,4 @@
-postal.wireTaps.push(function(data) {
+postal.addWireTap(function(data) {
     try {
         console.log(JSON.stringify(data || {}));
     }
