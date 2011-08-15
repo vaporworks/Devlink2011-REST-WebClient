@@ -19,7 +19,7 @@ postal.subscribe("activeOrder.change", function(data) {
 
 postal.subscribe("storage.load.menu", function() {
     var menu = amplify.store("menu");
-    if(menu) {
+    if(menu && menu.length > 0) {
         postal.publish("storage.menu", menu);
     }
 });

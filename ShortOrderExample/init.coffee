@@ -7,7 +7,7 @@ couch = new (cradle.Connection)(
     { cache: false, raw: false }
 )
 
-db = couch.database( "shortorder" )
+db = couch.database( "" )
 db.create()
 
 menuItems = [
@@ -72,7 +72,7 @@ writeIfMissing = ( item ) ->
                              "Could not save item " +
                              id +
                              " because " +
-                             err )
+                             JSON.stringify err )
                     else
                         console.log( " Saved item " + id + ". Yay!" )
             )

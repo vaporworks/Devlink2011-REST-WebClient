@@ -7,6 +7,8 @@ body {
 .thumbnail-image-nofloat {
     overflow: hidden;
     border-radius: 10px;
+    height: 48px;
+    width: 48px;
 }
 
 .thumbnail-image {

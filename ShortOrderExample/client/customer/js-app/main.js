@@ -95,11 +95,11 @@ postal.subscribe("order.items.add", function(item) {
 });
 
 postal.subscribe("menu.get", function(data) {
-    var menuViewModel = ko.mapping.fromJS(data);
+    var menuViewModel = ko.mapping.fromJS({ items: data });
     menuViewModel.isVisible = ko.observable(true);
     if(menuViewModel.items()) {
-        var len = menuViewModel.items().length;
         menuViewModel.items().forEach(function(item) {
+            item.pricePerUnit((item.pricePerUnit()).toFixed(2));
             item.addMenuItem = function() {
                 postal.publish("order.items.add", ko.mapping.toJS(item));
             }
