@@ -28,7 +28,7 @@ postal.subscribe("navigation.completed.toggle", function() {
     else {
         navigationViewModel.completedLabel("Show Completed");
     }
-})
+});
 
 var ordersViewModel = {
     orders: ko.observableArray([]),
@@ -154,7 +154,7 @@ $(function() {
         templateSuffix: ".html"
     });
 
-    postal.publish(postal.SYSTEM_EXCHANGE, "mode.set", {mode: postal.REPLAY_MODE });
+    //postal.publish(postal.SYSTEM_EXCHANGE, "mode.set", {mode: postal.REPLAY_MODE });
     //postal.publish(postal.SYSTEM_EXCHANGE, "mode.set", {mode: postal.CAPTURE_MODE });
     postal.publish("ko.init");
     postal.publish("repository.getOrders", {});
