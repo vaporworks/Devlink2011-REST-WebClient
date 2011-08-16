@@ -7,7 +7,7 @@ couch = new (cradle.Connection)(
     { cache: false, raw: false }
 )
 
-db = couch.database( "" )
+db = couch.database( "shortorder" )
 db.create()
 
 menuItems = [

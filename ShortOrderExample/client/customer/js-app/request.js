@@ -11,13 +11,16 @@
         type: "GET"
     });
 
-    amplify.request.define(FETCH_ORDER_STATUS, function(settings) {
-        var fakeStatus = { orderNumber: settings.data.orderNumber, status: "Some New Status" };
-        settings.success(fakeStatus);
+    amplify.request.define(FETCH_ORDER_STATUS, "ajax", {
+        url: "/order/{orderNumber}",
+        dataType: "json",
+        type: "GET"
     });
 
-    amplify.request.define(PLACE_ORDER, function(settings) {
-        settings.success({ orderNumber: settings.data.orderNumber, status: "Created" });
+    amplify.request.define(PLACE_ORDER, "ajax", {
+        url: "/order",
+        dataType: "json",
+        type: "POST"
     });
 
     postal.subscribe("repository.getMenu", function() {
@@ -42,13 +45,14 @@
         getOrderStatus: function(orderNumber) {
             var reqData = { orderNumber: orderNumber };
             amplify.request(FETCH_ORDER_STATUS, reqData, function(data) {
-                postal.publish("order.status.update", data);
+                postal.publish("order.status.update", { orderNumber: orderNumber, status: data.status });
             });
         },
 
         placeOrder: function(order) {
+            order.timeStamp = order.timeStamp.toString();
             amplify.request(PLACE_ORDER, order, function(data) {
-                postal.publish("order.submit.response", data);
+                postal.publish("order.submit.response", {orderNumber: order.orderNumber, status: data.status });
             });
         }
     };

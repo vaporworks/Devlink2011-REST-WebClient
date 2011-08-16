@@ -28,7 +28,7 @@
                 status: "Created"
             }
         ];
-        settings.success({ orders: fakeOrders });
+        settings.success(fakeOrders);
     });
 
     amplify.request.define(UPDATE_ORDER_STATUS, function(settings) {

@@ -37,22 +37,25 @@ class Order
 
     create: ( req, res ) ->
         console.log( req.body )
-        docId = req.body.id.toString()
+        docId = req.body.orderNumber.toString()
+        req.body.status = "Created"
+        req.body.type = "order"
         db.save( docId, req.body,
             ( err, doc ) ->
                 if not err?
-                    res.send( 201, doc )
+                    res.send( {status: "Created" }, 200 )
                 else
-                    res.send( 500, err )
+                    res.send( err, 500 )
         )
 
     update: ( req, res ) ->
-        docId = req.params.order
-        rev = req.body.rev
-        db.save( docId, rev, req.body.rev,
+        console.log( req.body )
+        docId = req.params.order.toString()
+        rev = req.body._rev
+        db.save( docId, rev, req.body
             ( err, doc ) ->
                 if not err?
-                    res.send( 200, doc )
+                    res.send( doc, 200 )
                 else
-                    res.send( 500, err )
+                    res.send( err, 500 )
         )

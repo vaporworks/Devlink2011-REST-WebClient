@@ -29,5 +29,5 @@ class Menu
             if not err?
                 res.send( doc )
             else
-                res.send( 404, err )
+                res.send( err, 404 )
         )

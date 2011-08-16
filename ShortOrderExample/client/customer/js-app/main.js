@@ -14,7 +14,7 @@ var orderViewModel = {
         delete order.isVisible;
         order.timeStamp = new Date();
         postal.publish("order.enqueue", order);
-        this.clear();
+        postal.publish("order.clear");
     }
 };
 
@@ -30,12 +30,20 @@ orderViewModel.publishChange = ko.dependentObservable(function() {
     return true;
 }, orderViewModel);
 
+orderViewModel.dispCost = ko.dependentObservable(function() {
+    var cost = 0;
+    this.items().forEach(function(item) {
+        cost += (item.qty() * item.pricePerUnit()) || 0;
+    });
+    return "$ " + (cost).toFixed(2);
+}, orderViewModel);
+
 orderViewModel.cost = ko.dependentObservable(function() {
     var cost = 0;
     this.items().forEach(function(item) {
-        cost += (item.qty() * item.pricePerUnit()) || -1;
+        cost += (item.qty() * item.pricePerUnit()) || 0;
     });
-    return "$ " + (cost).toFixed(2);
+    return cost;
 }, orderViewModel);
 
 orderViewModel.enableSubmit = ko.dependentObservable(function() {
@@ -45,6 +53,10 @@ orderViewModel.enableSubmit = ko.dependentObservable(function() {
             this.orderNumber().length > 0 &&
             this.items().length > 0
 }, orderViewModel);
+
+postal.subscribe("order.clear", function(){
+    orderViewModel.clear();
+});
 
 postal.subscribe("order.items.remove", function(item) {
     var target = orderViewModel.items().filter(function(x) { return x.id() === item.id; });
@@ -108,6 +120,7 @@ postal.subscribe("menu.get", function(data) {
     ko.applyBindings(menuViewModel, 'menu');
 });
 
+// binds to the history namespace
 var orderHistoryViewModel = {
     orders: ko.observableArray([]),
     isVisible: ko.observable(true)
@@ -117,26 +130,36 @@ postal.subscribe("order.enqueue", function(order) {
     var placedOrder = ko.mapping.fromJS(order);
     placedOrder.status = ko.observable("pending");
     placedOrder.dispTimeStamp = ko.dependentObservable(function() {
+        if(!(this.timeStamp() instanceof Date)) {
+            this.timeStamp(new Date(this.timeStamp()));
+        }
         return this.timeStamp().getMonth() + "/" + this.timeStamp().getDate() + "/" +
                this.timeStamp().getFullYear() + " " + this.timeStamp().toLocaleTimeString();
     }, placedOrder);
-    var token;
-    token = postal.subscribe("order.submit.response", function(data) {
+    postal.subscribe("order.submit.response", function(data) {
         placedOrder.status(data.status);
-        token();
-    });
+    }, { once: true });
     orderHistoryViewModel.orders.push(placedOrder);
     var enqueuedOrder = {
         name: placedOrder.name(),
         orderNumber: placedOrder.orderNumber(),
         items: ko.mapping.toJS(placedOrder.items),
         cost: placedOrder.cost(),
+        dispCost: placedOrder.cost(),
         timeStamp: placedOrder.timeStamp(),
         status: placedOrder.status(),
         dispTimeStamp: placedOrder.dispTimeStamp()
     };
     postal.publish("order.enqueued", enqueuedOrder);
     postal.publish("order.submit", enqueuedOrder);
+});
+
+postal.subscribe("order.status.update", function(data){
+    orderHistoryViewModel.orders().forEach(function(order) {
+        if(order.orderNumber() === data.orderNumber) {
+            order.status(data.status);
+        }
+    });
 });
 
 postal.subscribe("ko.init", function() {
@@ -167,6 +190,32 @@ postal.subscribe("storage.menu", function(menu) {
     postal.publish("menu.get", menu);
 });
 
+var orderStatusPoll = false,
+    orderNums = [],
+    pollForStatus = function() {
+    if(orderNums.length === 0) {
+        orderNums = orderHistoryViewModel.orders().map(function(order) { return order.orderNumber(); });
+    }
+    if(orderNums.length > 0) {
+        orderStatusPoll = true;
+        postal.publish("repository.getOrderStatus", {orderNumber: orderNums.pop() });
+        setTimeout(pollForStatus, 3000);
+    }
+    else {
+        orderStatusPoll = false;
+    }
+};
+
+postal.subscribe("order.enqueued", function() {
+    if(!orderStatusPoll) {
+        postal.publish("polling.order.status.start");
+    }
+});
+
+postal.subscribe("polling.order.status.start", function() {
+    setTimeout(pollForStatus, 5000);
+});
+
 $(function() {
     ko.externaljQueryTemplateEngine.setOptions({
         templateUrl: "templates",
@@ -179,4 +228,5 @@ $(function() {
     postal.publish("storage.load.activeOrder",{});
     postal.publish("storage.load.enqueuedOrders",{});
     postal.publish("repository.getMenu");
+    postal.publish("polling.order.status.start");
 });
