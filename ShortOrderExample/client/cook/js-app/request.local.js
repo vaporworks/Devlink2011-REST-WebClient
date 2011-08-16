@@ -1,13 +1,15 @@
 (function(global, undefined) {
     // CONSTANTS
     var UPDATE_ORDER_STATUS = "updateOrderStatus",
-        GET_ORDERS = "getOrders";
+        GET_ORDERS = "getOrders",
+        fakeOrderNumA = uuid(),
+        fakeOrderNumB = uuid();
 
     amplify.request.define(GET_ORDERS, function(settings) {
         var fakeOrders = [
             {
                 name: "Jim",
-                orderNumber: uuid(),
+                orderNumber: fakeOrderNumA,
                 items: [
                     {"id":0,"description":"Burger","pricePerUnit":"1.00","imageUrl":"/img/burger.png","qty":3},
                     {"id":1,"description":"Fries","pricePerUnit":"0.50","imageUrl":"/img/fries.png","qty":3}
@@ -18,7 +20,7 @@
             },
             {
                 name: "Alex",
-                orderNumber: uuid(),
+                orderNumber: fakeOrderNumB,
                 items: [
                     {"id":0,"description":"Burger","pricePerUnit":"1.00","imageUrl":"/img/burger.png","qty":3},
                     {"id":1,"description":"Fries","pricePerUnit":"0.50","imageUrl":"/img/fries.png","qty":3}
@@ -39,8 +41,12 @@
         repository.getOrders();
     });
 
-    postal.subscribe("order.status.change", function(data) {
+    postal.subscribe("order.update", function(data) {
         repository.updateOrderStatus(data.orderNumber, data.status);
+    });
+
+    postal.subscribe("orders.get", function(){
+        setTimeout(function() { postal.publish("repository.getOrders") }, 5000);
     });
 
     var repository = global.repository = {
