@@ -111,7 +111,9 @@ postal.subscribe("menu.get", function(data) {
     menuViewModel.isVisible = ko.observable(true);
     if(menuViewModel.items()) {
         menuViewModel.items().forEach(function(item) {
-            item.pricePerUnit((item.pricePerUnit()).toFixed(2));
+            item.dispPricePerUnit = ko.dependentObservable(function() {
+                return (item.pricePerUnit()).toFixed(2);
+            }, item);
             item.addMenuItem = function() {
                 postal.publish("order.items.add", ko.mapping.toJS(item));
             }

@@ -72,7 +72,7 @@ writeIfMissing = ( item ) ->
                              "Could not save item " +
                              id +
                              " because " +
-                             JSON.stringify err )
+                             err )
                     else
                         console.log( " Saved item " + id + ". Yay!" )
             )
